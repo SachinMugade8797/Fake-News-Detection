@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Fake News Detector</title>
+    <title>Fake News Detection</title>
 </head>
 <body>
     <h2>Fake News Detection</h2>
-    <form method="POST" action="/predict">
-        <textarea name="news_text" rows="5" cols="50"></textarea><br><br>
+
+    <form action="/predict" method="POST">
+        <textarea 
+            name="news_text" 
+            rows="6" 
+            cols="60"
+            placeholder="Paste news text here..."
+            required
+        ></textarea>
+        <br><br>
+
         <button type="submit">Predict</button>
     </form>
 
-    {% if prediction %}
+    {% if prediction is not none %}
         <h3>Prediction: {{ prediction }}</h3>
     {% endif %}
 </body>
