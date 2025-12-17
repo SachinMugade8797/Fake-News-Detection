@@ -17,9 +17,21 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
     text = request.form.get("news_text")
+
+    if not text:
+        return render_template("index.html", prediction="No text received")
+
     vect = vectorizer.transform([text])
     pred = model.predict(vect)[0]
-    return render_template("index.html", prediction=pred)
+
+    # Convert numeric output to label
+    if pred == 1:
+        result = "Real News"
+    else:
+        result = "Fake News"
+
+    return render_template("index.html", prediction=result)
 
 if __name__ == "__main__":
     app.run()
+
